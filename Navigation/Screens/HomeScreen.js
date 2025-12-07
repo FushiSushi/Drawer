@@ -14,49 +14,49 @@ const { width } = Dimensions.get('window');
 
 export default function HomeScreen({ navigation }) {
   const dashboardItems = [
-    { title: 'Projets Actifs', value: '12', color: '#4CAF50', icon: '📊' },
-    { title: 'Tâches Terminées', value: '47', color: '#FF9800', icon: '✅' },
-    { title: 'Messages', value: '8', color: '#E91E63', icon: '💬' },
-    { title: 'Notifications', value: '3', color: '#9C27B0', icon: '🔔' },
+    { title: 'En cours', value: '7', color: '#2196F3', icon: '⏳' },
+    { title: 'Terminé aujourd\'hui', value: '3', color: '#4CAF50', icon: '✓' },
+    { title: 'Messages non lus', value: '2', color: '#FF5722', icon: '💬' },
+    { title: 'En retard', value: '1', color: '#F44336', icon: '⚠️' },
   ];
 
   const quickActions = [
-    { title: 'Nouveau Projet', icon: '➕', action: () => {} },
-    { title: 'Calendrier', icon: '📅', action: () => {} },
-    { title: 'Rapports', icon: '📈', action: () => {} },
+    { title: 'Ajouter une tâche', icon: '+', action: () => {} },
+    { title: 'Voir agenda', icon: '📅', action: () => {} },
     { title: 'Équipe', icon: '👥', action: () => {} },
+    { title: 'Fichiers', icon: '📁', action: () => {} },
   ];
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1976D2" />
+      <StatusBar barStyle="dark-content" backgroundColor="#f8f9fa" />
       
-      {/* Header avec gradient */}
-      <LinearGradient
-        colors={['#1976d2ff', '#42A5F5']}
-        style={styles.header}
-      >
-        <Text style={styles.headerTitle}>🏠 Tableau de Bord</Text>
-        <Text style={styles.headerSubtitle}>Bienvenue dans votre espace de travail</Text>
-      </LinearGradient>
+      {/* Header simple */}
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>Salut!</Text>
+        <Text style={styles.headerSubtitle}>Voyons ce que tu as à faire</Text>
+      </View>
 
       <ScrollView style={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Cartes de statistiques */}
+        {/* Vue d'ensemble */}
         <View style={styles.statsContainer}>
           {dashboardItems.map((item, index) => (
-            <TouchableOpacity key={index} style={[styles.statCard, { borderLeftColor: item.color }]}>
-              <Text style={styles.statIcon}>{item.icon}</Text>
-              <View style={styles.statInfo}>
-                <Text style={styles.statValue}>{item.value}</Text>
-                <Text style={styles.statTitle}>{item.title}</Text>
+            <TouchableOpacity key={index} style={styles.statCard}>
+              <View style={styles.statLeft}>
+                <Text style={styles.statIcon}>{item.icon}</Text>
+                <View>
+                  <Text style={styles.statValue}>{item.value}</Text>
+                  <Text style={styles.statTitle}>{item.title}</Text>
+                </View>
               </View>
+              <View style={[styles.statIndicator, { backgroundColor: item.color }]} />
             </TouchableOpacity>
           ))}
         </View>
 
         {/* Actions rapides */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Actions Rapides</Text>
+          <Text style={styles.sectionTitle}>Accès rapide</Text>
           <View style={styles.actionsContainer}>
             {quickActions.map((action, index) => (
               <TouchableOpacity key={index} style={styles.actionCard} onPress={action.action}>
@@ -67,21 +67,21 @@ export default function HomeScreen({ navigation }) {
           </View>
         </View>
 
-        {/* Activités récentes */}
+        {/* Activité récente */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Activités Récentes</Text>
+          <Text style={styles.sectionTitle}>Récent</Text>
           <View style={styles.activityContainer}>
             <View style={styles.activityItem}>
-              <View style={[styles.activityDot, { backgroundColor: '#4CAF50' }]} />
-              <Text style={styles.activityText}>Projet "Application Mobile" mis à jour</Text>
+              <Text style={styles.activityTime}>Il y a 2h</Text>
+              <Text style={styles.activityText}>Sarah a commenté "Design mobile"</Text>
             </View>
             <View style={styles.activityItem}>
-              <View style={[styles.activityDot, { backgroundColor: '#FF9800' }]} />
-              <Text style={styles.activityText}>3 nouvelles tâches assignées</Text>
+              <Text style={styles.activityTime}>Hier</Text>
+              <Text style={styles.activityText}>3 nouvelles tâches dans "Backend"</Text>
             </View>
             <View style={styles.activityItem}>
-              <View style={[styles.activityDot, { backgroundColor: '#E91E63' }]} />
-              <Text style={styles.activityText}>Rapport mensuel généré</Text>
+              <Text style={styles.activityTime}>Lundi</Text>
+              <Text style={styles.activityText}>Réunion équipe - notes ajoutées</Text>
             </View>
           </View>
         </View>
@@ -93,73 +93,78 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F7FA',
+    backgroundColor: '#f8f9fa',
   },
   header: {
-    paddingTop: 20,
-    paddingBottom: 30,
+    paddingTop: 40,
+    paddingBottom: 20,
     paddingHorizontal: 20,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
+    backgroundColor: '#f8f9fa',
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 5,
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1a1a1a',
+    marginBottom: 4,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#6c757d',
+    fontWeight: '400',
   },
   scrollContent: {
     flex: 1,
-    paddingTop: 20,
   },
   statsContainer: {
-    paddingHorizontal: 15,
-    marginBottom: 25,
+    paddingHorizontal: 16,
+    marginBottom: 24,
   },
   statCard: {
     backgroundColor: 'white',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 15,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  statLeft: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderLeftWidth: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
   },
   statIcon: {
-    fontSize: 24,
-    marginRight: 15,
-  },
-  statInfo: {
-    flex: 1,
+    fontSize: 20,
+    marginRight: 12,
   },
   statValue: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#1a1a1a',
+    marginBottom: 2,
   },
   statTitle: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 2,
+    color: '#6c757d',
+  },
+  statIndicator: {
+    width: 4,
+    height: 40,
+    borderRadius: 2,
   },
   section: {
-    paddingHorizontal: 15,
-    marginBottom: 25,
+    paddingHorizontal: 16,
+    marginBottom: 24,
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 15,
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1a1a1a',
+    marginBottom: 12,
   },
   actionsContainer: {
     flexDirection: 'row',
@@ -168,51 +173,50 @@ const styles = StyleSheet.create({
   },
   actionCard: {
     backgroundColor: 'white',
-    borderRadius: 15,
-    padding: 20,
-    width: (width - 45) / 2,
+    borderRadius: 12,
+    padding: 16,
+    width: (width - 44) / 2,
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   actionIcon: {
-    fontSize: 30,
-    marginBottom: 10,
+    fontSize: 24,
+    marginBottom: 8,
+    color: '#495057',
   },
   actionTitle: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
+    fontWeight: '500',
+    color: '#495057',
     textAlign: 'center',
   },
   activityContainer: {
     backgroundColor: 'white',
-    borderRadius: 15,
-    padding: 20,
+    borderRadius: 12,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
   },
   activityItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 16,
   },
-  activityDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 15,
+  activityTime: {
+    fontSize: 12,
+    color: '#6c757d',
+    marginBottom: 4,
+    fontWeight: '500',
   },
   activityText: {
     fontSize: 14,
-    color: '#666',
-    flex: 1,
+    color: '#495057',
+    lineHeight: 20,
   },
 });

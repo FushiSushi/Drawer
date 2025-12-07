@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './Screens/HomeScreen';
 import ProfileScreen from './Screens/ProfileScreen';
@@ -13,27 +14,28 @@ export default function DrawerNavigator() {
         headerShown: true,
         drawerType: 'slide',
         drawerStyle: {
-          backgroundColor: '#F8F9FA',
-          width: 280,
+          backgroundColor: 'white',
+          width: 260,
         },
-        drawerActiveTintColor: '#1976D2',
-        drawerInactiveTintColor: '#666',
+        drawerActiveTintColor: '#007AFF',
+        drawerInactiveTintColor: '#8E8E93',
         drawerLabelStyle: {
           fontSize: 16,
-          fontWeight: '600',
+          fontWeight: '500',
+          marginLeft: -20,
         },
         headerStyle: {
-          backgroundColor: '#FFFFFF',
-          elevation: 2,
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
+          backgroundColor: 'white',
           shadowColor: '#000',
-          shadowOffset: { width: 0, height: 2 },
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.1,
+          shadowRadius: 3,
+          elevation: 2,
         },
-        headerTintColor: '#333',
+        headerTintColor: '#1a1a1a',
         headerTitleStyle: {
           fontWeight: '600',
-          fontSize: 18,
+          fontSize: 17,
         },
       }}
     >
@@ -41,12 +43,8 @@ export default function DrawerNavigator() {
         name="Home" 
         component={HomeScreen} 
         options={{
-          title: ' Accueil',
-          drawerIcon: () => '🏠',
-          headerTitleStyle: {
-            color: '#1976D2',
-            fontWeight: 'bold',
-          },
+          title: 'Accueil',
+          drawerIcon: ({ color }) => <Text style={{color, fontSize: 16}}>🏠</Text>,
         }}
       />
       <Drawer.Screen 
@@ -54,23 +52,15 @@ export default function DrawerNavigator() {
         component={ProfileScreen} 
         options={{
           title: 'Profil',
-          drawerIcon: () => '👤',
-          headerTitleStyle: {
-            color: '#9C27B0',
-            fontWeight: 'bold',
-          },
+          drawerIcon: ({ color }) => <Text style={{color, fontSize: 16}}>👤</Text>,
         }}
       />
       <Drawer.Screen 
         name="Settings" 
         component={SettingsScreen} 
         options={{
-          title: 'Paramètres',
-          drawerIcon: () => '⚙️',
-          headerTitleStyle: {
-            color: '#4CAF50',
-            fontWeight: 'bold',
-          },
+          title: 'Réglages',
+          drawerIcon: ({ color }) => <Text style={{color, fontSize: 16}}>⚙️</Text>,
         }}
       />
     </Drawer.Navigator>
